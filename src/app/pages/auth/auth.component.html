@@ -1,0 +1,156 @@
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <!-- Left Side - Branding -->
+    <div class="auth-branding">
+      <div class="branding-content">
+        <div class="logo-section">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h1 class="logo-title">DevFlow</h1>
+        </div>
+        
+        <div class="branding-text">
+          <h2 class="welcome-title">Bienvenido de vuelta</h2>
+          <p class="welcome-subtitle">
+            Accede a tu cuenta y continúa construyendo proyectos increíbles
+          </p>
+        </div>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Despliegue instantáneo</span>
+          </div>
+          <div class="feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Monitoreo 24/7</span>
+          </div>
+          <div class="feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Seguridad avanzada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Form -->
+    <div class="auth-form-section">
+      <div class="form-container">
+        <!-- Toggle Tabs -->
+        <div class="auth-tabs">
+          <button 
+            [class.active]="isLogin()" 
+            (click)="toggleMode()"
+            class="tab-button">
+            Iniciar Sesión
+          </button>
+          <button 
+            [class.active]="!isLogin()" 
+            (click)="toggleMode()"
+            class="tab-button">
+            Registrarse
+          </button>
+        </div>
+
+        <!-- Form Title -->
+        <div class="form-header">
+          <h2 class="form-title">
+            {{ isLogin() ? 'Inicia sesión en tu cuenta' : 'Crea tu cuenta' }}
+          </h2>
+          <p class="form-subtitle">
+            {{ isLogin() ? 'Ingresa tus credenciales para continuar' : 'Completa el formulario para comenzar' }}
+          </p>
+        </div>
+
+        <!-- Google Login Button -->
+        <button class="google-button" (click)="onGoogleLogin()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continuar con Google
+        </button>
+
+        <div class="divider">
+          <span class="divider-text">o continúa con email</span>
+        </div>
+
+        <!-- Auth Form -->
+        <form class="auth-form" (submit)="onSubmit()">
+          <!-- Name field (only for register) -->
+          <div class="form-group" *ngIf="!isLogin()">
+            <label class="form-label">Nombre completo</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              placeholder="Juan Pérez"
+              required>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label">Correo electrónico</label>
+            <input 
+              type="email" 
+              class="form-input" 
+              placeholder="tu@email.com"
+              required>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label">Contraseña</label>
+            <input 
+              type="password" 
+              class="form-input" 
+              placeholder="••••••••"
+              required>
+          </div>
+
+          <!-- Forgot Password (only for login) -->
+          <div class="form-options" *ngIf="isLogin()">
+            <label class="checkbox-label">
+              <input type="checkbox" class="checkbox-input">
+              <span>Recordarme</span>
+            </label>
+            <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <!-- Terms (only for register) -->
+          <div class="terms-section" *ngIf="!isLogin()">
+            <label class="checkbox-label">
+              <input type="checkbox" class="checkbox-input" required>
+              <span>Acepto los <a href="#" class="link">términos y condiciones</a></span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-button">
+            {{ isLogin() ? 'Iniciar Sesión' : 'Crear Cuenta' }}
+          </button>
+        </form>
+
+        <!-- Footer Text -->
+        <div class="form-footer">
+          <p class="footer-text">
+            {{ isLogin() ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
+            <button class="footer-link" (click)="toggleMode()">
+              {{ isLogin() ? 'Regístrate aquí' : 'Inicia sesión' }}
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
